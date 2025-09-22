@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Museu das Favelas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* Carrossel ocupa 100% da tela */
+    @font-face {
+      font-family: futura-display;
+      src: url(Fontes/futura-display-cufonfonts/Futura\ Display.ttf);
+    }
+
+    @font-face {
+      font-family: geometrica-sans;
+      src: url(Fontes/Boris-Garic_Geometrica-sans-free-demo_070417/GeometricaSans-Regular.ttf);
+    }
+
+    @font-face {
+      font-family: graffiti;
+      src: url(Fontes/sprite-graffiti/Sprite\ Graffiti.otf);
+    }
+
+    @font-face {
+      font-family: BebasNeue;
+      src: url(Fontes/Bebas_Neue/BebasNeue-Regular.ttf);
+    }
+
+    #carouselExampleCaptions {
+      width: 100%;
+      height: 100vh;
+    }
+
+    body {
+      background-color: #333;
+    }
+
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.5);
+      /* semi-transparente */
+      font-family: futura-display;
+    }
+
+    .navbar a {
+      color: white !important;
+      font-weight: 500;
+    }
+
+
+    .titulo {
+      font-size: clamp(6rem, 20vw, 12rem) !important;
+      font-family: graffiti;
+      color: #2697d5;
+      text-shadow: 4px 4px 6px white;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+
+    /* Texto centralizado e responsivo */
+    .inicio {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: clamp(3rem, 10vw, 6rem) !important;
+      font-weight: bold;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      padding: 0 5%;
+    }
+
+    /* Navbar sempre visível */
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .navbar a {
+      color: white !important;
+      font-weight: 500;
+    }
+
+    
+    footer {
+      color: #fff;
+      background: #111;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* Estilo dos cards */
+    .cards-container {
+      display: flex;
+      /* transforma em flex container */
+      flex-wrap: wrap;
+      /* permite que quebrem linha se não couberem */
+      justify-content: center;
+      /* centraliza horizontalmente */
+      gap: 20px;
+      /* espaçamento entre os cards */
+      padding: 40px 0;
+      /* espaçamento vertical */
+    }
+
+    /* Estilo dos cards - imagem ocupa todo o card e texto sobreposto */
+    .card {
+      position: relative;
+      /* importante para o texto ficar sobre a imagem */
+      width: 250px;
+      height: 350px;
+      margin: 15px;
+      cursor: pointer;
+      overflow: hidden;
+      /* evita que o texto saia do card */
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      /* leve zoom ao passar o mouse */
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* cobre todo o card */
+      display: block;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .card-texto {
+      position: absolute;
+      bottom: 0;
+      /* posiciona o texto na parte inferior */
+      left: 0;
+      width: 100%;
+      padding: 10px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      /* fundo semitransparente */
+      text-align: center;
+    }
+
+    .card-texto h2 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .card-texto p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .quebratexto {
+      background-image: url(img/fundo\ azul.png);
+      background-color: black;
+      color: white;
+      line-height: 1.3em;
+      text-align: center;
+      font-family: graffiti;
+      padding: 2rem 1rem;
+    }
+
+    .titulo_nav {
+      font-family: BebasNeue;
+    }
+
+    .arte_nav {
+      font-family: graffiti;
+      color: #fe731d;
+    }
+
+    .quebratexto h2 {
+      font-size: 5rem;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+      /* ajuste o valor conforme desejar */
+    }
+
+    .conteudo {
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.95);
+      /* sombra escura forte no texto */
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .conteudo h5 {
+
+      font-family: futura-display;
+      font-size: 2rem;
+    }
+
+    .btn-close {
+      filter: invert(1);
+      /* deixa o "X" branco */
+    }
+
+    .modal-backdrop.show {
+      background-color: rgba(0, 0, 0, 0.92);
+    }
+
+    .modal-backdrop {
+      transition: background-color 0.3s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="Index.html">
+        <h5 class="titulo_nav">Quebr<span class="arte_nav">Arte</span></h5>
+      </a>
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link active" href="Index.html">Home</a>
+          <a class="nav-link" href="linhadotempo.html">Linha do Tempo</a>
+          <a class="nav-link" href="musica.html">Músicas</a>
+          <a class="nav-link" href="livros.html">Livros</a>
+          <a class="nav-link" href="Pintura.html">Pintura</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Carrossel -->
+  <div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="img/favelas.png" class="d-block w-100" alt="Imagem da favela">
+        <div class="inicio">
+          <h5 class="titulo">pintura</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Seção RAP -->
+  <div class="quebratexto">
+    <h2>Grafite e Arte Urbana</h2>
+  </div>
+  <div class="cards-container">
+    <!-- Card 1 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalOsGemeos">
+      <img src="img/OsGemeos.png" alt="OsGemeos" class="card-img">
+      <div class="card-texto">
+        <h2>Os Gêmeos </h2>
+        <p>Otávio e Gustavo Pandolfo, 1974</p>
+      </div>
+
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalKobra">
+      <img src="img/Kobra.png" alt="Kobra" class="card-img">
+      <div class="card-texto">
+        <h2>Eduardo Kobra </h2>
+        <p>1975</p>
+      </div>
+
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalPandolfo">
+      <img src="img/NinaPandolfo.png" alt="Nina Pandolfo" class="card-img">
+      <div class="card-texto">
+        <h2>Nina Pandolfo </h2>
+        <p>1977</p>
+      </div>
+
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalMundano">
+      <img src="img/Mundano.png" alt="Mundano" class="card-img">
+      <div class="card-texto">
+        <h2>Mundano </h2>
+        <p>1986</p>
+      </div>
+
+    </div>
+  </div> <!-- ✅ fecha os cards antes dos modais -->
+
+  <!-- Modais -->
+  <!-- Gêmeos -->
+  <div class="modal fade" id="modalOsGemeos" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Os Gêmeos (Otávio e Gustavo Pandolfo, 1974)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Otávio e Gustavo Pandolfo são irmãos gêmeos e artistas plásticos nascidos em São Paulo. Reconhecidos
+          internacionalmente, se tornaram ícones do grafite brasileiro com seu estilo caracterizado por personagens
+          amarelos e cenários oníricos.<br>
+          Começaram a desenhar ainda na infância e, no final dos anos 1980, tiveram contato com o hip hop, que
+          influenciou fortemente seu trabalho.Em 1987, iniciaram no grafite pelas ruas de São Paulo; nos anos 1990, suas
+          obras começaram a ganhar destaque fora do país.Já realizaram exposições em museus como o Tate Modern (Londres)
+          e o MoMA (Nova York).
+          <br> São considerados pioneiros na internacionalização do grafite brasileiro e continuam ativos na cena
+          artística mundial.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kobra -->
+  <div class="modal fade" id="modalKobra" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Eduardo Kobra (1975)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Eduardo Kobra é um muralista e grafiteiro nascido em São Paulo, conhecido por murais de grande escala e uso
+          vibrante de cores, com forte influência do realismo e da geometria.<br>
+          Começou a grafitar nos anos 1980, enfrentando repressão policial quando o grafite ainda era criminalizado.
+          Fundou o Studio Kobra nos anos 1990, onde passou a desenvolver murais que resgatam memórias urbanas e figuras
+          históricas.
+          <br>Criou murais em mais de 30 países, incluindo o painel Etnias (2016), feito para os Jogos Olímpicos do Rio,
+          considerado um dos maiores murais do mundo. Sua obra combina engajamento social, memória e estética,
+          tornando-se referência da arte urbana global.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nina Pandolfo -->
+  <div class="modal fade" id="modalPandolfo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Nina Pandolfo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Nina Pandolfo é uma grafiteira e artista plástica nascida em Tupã (SP). É conhecida por personagens femininas
+          de aparência delicada e surreal, que questionam padrões sociais e dão voz à infância e ao universo
+          feminino.<br>
+          Começou a pintar muros em 1992, quando a presença de mulheres no grafite era rara, uniu-se a coletivos de
+          grafite e logo ganhou destaque pela singularidade de suas figuras.
+          <br>Já expôs em países como EUA, Japão e Alemanha, além de colaborar com Os Gêmeos em murais icônicos, como o
+          do Castelo Kelburn, na Escócia (2007), além de abrir caminho para maior representatividade feminina no grafite
+          e consolidou-se como uma das artistas urbanas mais importantes do Brasil.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mundano -->
+  <div class="modal fade" id="modalMundano" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Mundano</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Rafael, conhecido como Mundano, é artista visual e ativista social nascido em São Paulo. Seu trabalho mistura
+          grafite, engajamento político e sustentabilidade. <br>
+          Começou a grafitar aos 13 anos, influenciado pela cultura de rua e pela realidade social da periferia. Fundou
+          o projeto Pimp My Carroça (2007), que customiza carroças de catadores de recicláveis com arte, dando
+          visibilidade e dignidade à categoria.<br>
+          Foi reconhecido internacionalmente e premiado pela ONU em 2013 pelo impacto social de sua arte; realizou
+          exposições e murais em vários países. Seu grafite é um instrumento de ativismo, conectando arte e
+          transformação social, tornando-o referência no uso da pintura urbana como ferramenta de cidadania.
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ======================================== -->
+  <!-- Seção Pintura Figurativa / Retratos -->
+  <!-- ======================================== -->
+  <div class="quebratexto">
+    <h2>Pintura Figurativa e Retratos Periféricos</h2>
+  </div>
+  <div class="cards-container">
+    <!-- Card 1 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalMulambo">
+      <img src="img/Mulambo.png" alt="Mulambo" class="card-img">
+      <div class="card-texto">
+        <h2>Mulambo</h2>
+        <p>1982</p>
+      </div>
+
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalJuliana">
+      <img src="img/Ju_santos.png" alt="Juliana dos Santos" class="card-img">
+      <div class="card-texto">
+        <h2>Juliana dos Santos</h2>
+        <p>1980</p>
+      </div>
+
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalKika">
+      <img src="img/Kika_Carvalho.png" alt="Kika Carvalho" class="card-img">
+      <div class="card-texto">
+        <h2>Kika Carvalho</h2>
+        <p>1987</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modais Pintura Figurativa -->
+  <!-- Mulambo -->
+  <div class="modal fade" id="modalMulambo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Mulambo (1982)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Mulambo é artista visual e pintor nascido no Rio de Janeiro. Sua obra tem forte vínculo com a periferia
+          carioca e traz retratos que misturam colagem, pintura e materiais descartados.<br>
+          Começou a produzir na década de 2000, inspirado pela cultura urbana e pela desigualdade que observava em sua
+          vivência. Utilizava restos de madeira e objetos encontrados na rua como suporte para retratos de personagens
+          periféricos.<br>
+          Participou de exposições no Brasil e no exterior, como a Bienal de São Paulo e mostras em Berlim. Resignifica
+          a ideia de “resto” e coloca o sujeito periférico como protagonista de sua obra.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Juliana dos Santos -->
+  <div class="modal fade" id="modalJuliana" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Juliana dos Santos (1980)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Juliana dos Santos é artista visual, pesquisadora e professora nascida em Santo André (SP). Sua produção é
+          marcada por retratos e instalações que abordam corpo, identidade negra e religiosidade afro-brasileira.<br>
+          Graduou-se em artes visuais e começou a expor no início dos anos 2000, desenvolvendo pinturas e colagens que
+          tratam da memória e da corporeidade da mulher negra.<br>
+          Exposições incluem Museu Afro Brasil e Sesc, com prêmios de arte contemporânea. Conecta periferia, identidade
+          e espiritualidade, fortalecendo a presença de mulheres negras na pintura brasileira.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kika Carvalho -->
+  <div class="modal fade" id="modalKika" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Kika Carvalho (1987)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Kika Carvalho é artista visual e ilustradora nascida em São Paulo, que trabalha principalmente com pintura e
+          retratos de mulheres negras.<br>
+          Começou a atuar em coletivos de arte da periferia na década de 2000, criando retratos com cores vibrantes e
+          simbologia afro-brasileira.<br>
+          Suas obras circularam em exposições no Brasil e publicações de arte feminista e periférica. Valoriza a
+          identidade negra e feminina, criando imagens de empoderamento e resistência.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================== -->
+  <!-- Seção Pintura Digital / Novas Mídias -->
+  <!-- ======================================== -->
+  <div class="quebratexto">
+    <h2>Pintura Digital e Novas Mídias</h2>
+  </div>
+  <div class="cards-container">
+    <!-- Card 1 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalRaizCampos">
+      <img src="img/raizcampos.png" alt="Raiz Campos" class="card-img">
+      <div class="card-texto">
+        <h2>Raiz Campos</h2>
+        <p>1985</p>
+      </div>
+
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalAfrofuturismo">
+      <img src="img/afrofuturismo.png" alt="Afrofuturismo Periférico" class="card-img">
+      <div class="card-texto">
+        <h2>Afrofuturismo Periférico</h2>
+        <p>2015</p>
+      </div>
+
+
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalSilvana">
+      <img src="img/silvana.png" alt="Anderson Augusto" class="card-img">
+      <div class="card-texto">
+        <h2>Silvana Mendes</h2>
+        <p>1989</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modais Pintura Digital -->
+  <!-- Raiz Campos -->
+  <div class="modal fade" id="modalRaizCampos" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Raiz Campos (1985)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Raiz Campos é artista digital e ilustrador nascido em São Paulo, especializado em pintura digital e
+          animação.<br>
+          Começou no final dos anos 2000 explorando softwares de design e arte digital. Seus primeiros trabalhos foram
+          ilustrações digitais inspiradas na cultura hip hop e grafite.<br>
+          Participou de exposições digitais e físicas, além de colaborar com coletivos de arte urbana. Combina pintura
+          digital e narrativa visual para retratar a vivência da periferia.
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Afrofuturismo Periférico -->
+  <div class="modal fade" id="modalAfrofuturismo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Afrofuturismo Periférico (Coletivo, 2015)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Afrofuturismo Periférico é um coletivo artístico formado por jovens da periferia de São Paulo que exploram
+          pintura digital, ilustração e design gráfico.<br>
+          Surgiu em 2015 com a proposta de unir cultura periférica e estética afrofuturista. Seus primeiros trabalhos
+          foram séries de ilustrações digitais e murais virtuais que reinterpretam a história negra com tecnologia e
+          ficção científica.<br>
+          Participaram de exposições em museus e centros culturais, além de ampla circulação nas redes sociais. Criam
+          pontes entre tradição, periferia e tecnologia, inspirando jovens artistas a usar meios digitais como expressão
+          cultural.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Anderson Augusto (Sao) -->
+  <div class="modal fade" id="modalSilvana" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Silvana Mendes (1989)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Silvana Mendes é artista maranhense que trabalha com colagem digital, muralismo e fotografia.<br>
+          Começou na década de 2010 explorando diferentes mídias digitais para expressar identidade, memória e cultura
+          afro-brasileira.<br>
+          Seus primeiros trabalhos foram colagens digitais e murais que desconstruíam estereótipos e questionavam
+          padrões de beleza e representação de corpos negros.<br>
+          Participou de exposições coletivas e individuais em centros culturais do Maranhão e em festivais de arte
+          digital no Brasil.<br>
+          Sua obra combina afrofuturismo, fotografia e pintura digital para ressignificar visualidades de corpos negros,
+          valorizando a diversidade e a estética periférica nas artes visuais.
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>As alecrim dourados e o pé de xu © 2025</p>
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

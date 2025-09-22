@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Museu das Favelas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    @font-face {
+      font-family: futura-display;
+      src: url(Fontes/futura-display-cufonfonts/Futura\ Display.ttf);
+    }
+
+    @font-face {
+      font-family: geometrica-sans;
+      src: url(Fontes/Boris-Garic_Geometrica-sans-free-demo_070417/GeometricaSans-Regular.ttf);
+    }
+
+    @font-face {
+      font-family: graffiti;
+      src: url(Fontes/sprite-graffiti/Sprite\ Graffiti.otf);
+    }
+    
+        @font-face {
+            font-family: BebasNeue;
+            src: url(Fontes/Bebas_Neue/BebasNeue-Regular.ttf);
+        }
+
+    /* Carrossel ocupa 100% da tela */
+    #carouselExampleCaptions {
+      width: 100%;
+      height: 100vh;
+    }
+
+    body {
+      background-color: #333;
+    }
+
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.5);
+      /* semi-transparente */
+      font-family: futura-display;
+    }
+
+    .navbar a {
+      color: white !important;
+      font-weight: 500;
+    }
+
+    .titulo {
+      font-size: clamp(6rem, 20vw, 12rem) !important;
+      font-family: graffiti;
+      color: #fe731d;
+      text-shadow: 4px 4px 6px white;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+
+    /* Texto centralizado e responsivo */
+    .inicio {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: clamp(3rem, 10vw, 6rem) !important;
+      font-weight: bold;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      padding: 0 5%;
+    }
+
+    /* Navbar sempre visível */
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .navbar a {
+      color: white !important;
+      font-weight: 500;
+    }
+
+    
+    footer {
+      color: #fff;
+      background: #111;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .cards-container {
+      display: flex;
+      /* transforma em flex container */
+      flex-wrap: wrap;
+      /* permite que quebrem linha se não couberem */
+      justify-content: center;
+      /* centraliza horizontalmente */
+      gap: 20px;
+      /* espaçamento entre os cards */
+      padding: 40px 0;
+      /* espaçamento vertical */
+    }
+
+    /* Estilo dos cards - imagem ocupa todo o card e texto sobreposto */
+    .card {
+      position: relative;
+      /* importante para o texto ficar sobre a imagem */
+      width: 250px;
+      height: 350px;
+      margin: 15px;
+      cursor: pointer;
+      overflow: hidden;
+      /* evita que o texto saia do card */
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      /* leve zoom ao passar o mouse */
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* cobre todo o card */
+      display: block;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .card-texto {
+      position: absolute;
+      bottom: 0;
+      /* posiciona o texto na parte inferior */
+      left: 0;
+      width: 100%;
+      padding: 10px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      /* fundo semitransparente */
+      text-align: center;
+    }
+
+    .card-texto h2 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .card-texto p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    .titulo_nav{
+            font-family: BebasNeue;
+        }
+        .arte_nav{
+            font-family: graffiti;
+            color: #fe731d;
+        }
+
+    .quebratexto {
+      background-image: url(img/fundo\ musica.png);
+      background-color: black;
+      color: white;
+      line-height: 1.3em;
+      text-align: center;
+      font-family: graffiti;
+      padding: 2rem 1rem;
+    }
+
+    .quebratexto h2 {
+      font-size: 5rem;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+      /* ajuste o valor conforme desejar */
+    }
+
+    .conteudo {
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.95);
+      /* sombra escura forte no texto */
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .conteudo h5 {
+
+      font-family: futura-display;
+      font-size: 2rem;
+    }
+
+    .btn-close {
+      filter: invert(1);
+      /* deixa o "X" branco */
+    }
+
+    .modal-backdrop.show {
+      background-color: rgba(0, 0, 0, 0.92);
+    }
+
+    .modal-backdrop {
+      transition: background-color 0.3s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+     <a class="navbar-brand" href="Index.html">
+                <h5 class="titulo_nav">Quebr<span class="arte_nav">Arte</span></h5>
+            </a>
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link active" href="Index.html">Home</a>
+          <a class="nav-link" href="linhadotempo.html">Linha do Tempo</a>
+          <a class="nav-link" href="musica.html">Músicas</a>
+          <a class="nav-link" href="livros.html">Livros</a>
+          <a class="nav-link" href="Pintura.html">Pintura</a>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Carrossel -->
+  <div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="img/favelas.png" class="d-block w-100" alt="Imagem da favela">
+        <div class="inicio">
+          <h5 class="titulo">Música</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Seção RAP -->
+  <div class="quebratexto">
+    <h2>RAP</h2>
+  </div>
+
+
+  <div class="cards-container">
+    <!-- Card 1 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalRacionais">
+      <img src="img/racionais.png" alt="Racionais MC’s" class="card-img">
+      <div class="card-texto">
+        <h2>Racionais MC’s</h2>
+        <p>Rap nacional</p>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalEmicida">
+      <img src="img/emicida.png" alt="Emicida" class="card-img">
+      <div class="card-texto">
+        <h2>Emicida</h2>
+        <p>Rap com MPB e cultura afro</p>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalCriolo">
+      <img src="img/criolo.png" alt="Criolo" class="card-img">
+      <div class="card-texto">
+        <h2>Criolo</h2>
+        <p>Rap da periferia paulistana</p>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalSabotage">
+      <img src="img/sabotage1png-c840da93961feb77.png" alt="Sabotage" class="card-img">
+      <div class="card-texto">
+        <h2>Sabotage</h2>
+        <p>Rap brasileiro</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modais -->
+  <div class="modal fade" id="modalRacionais" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Racionais MC’s</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          “Os Racionais MC’s são um grupo de rap brasileiro fundado em 1988, formado por Mano Brown, Ice Blue, Edi Rock
+          e KL Jay. Considerado o maior grupo de rap do Brasil, ganhou destaque por letras que denunciam o racismo, a
+          violência policial, o crime, a exclusão social e a realidade da periferia.
+          <br>
+
+          Primeiros sucessos: “Pânico na Zona Sul” e “Tempos Difíceis” (1988), no disco Holocausto Urbano (1990).
+
+          Álbuns de destaque:
+
+          Raio X Brasil (1993) – músicas como “Homem na Estrada”;
+
+          Sobrevivendo no Inferno (1997) – clássico com “Diário de um Detento” e “Capítulo 4, Versículo 3”;
+
+          Nada como um Dia após o Outro Dia (2002) – com “Vida Loka I e II” e “Negro Drama”.
+
+
+          <br>
+
+          Integrantes:
+          <br>
+
+          Mano Brown – vocalista, principal compositor;
+          <br>
+          Ice Blue – rapper e radialista;
+          <br>
+          Edi Rock – rapper e compositor, também atua em carreira solo;
+          <br>
+          KL Jay – DJ e produtor musical.”
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalEmicida" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Emicida</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          “Emicida (Leandro Roque de Oliveira, 1985) é rapper e produtor musical brasileiro, nascido em São Paulo. Ficou
+          conhecido pelas rimas de improviso, conquistando 11 vitórias consecutivas na Batalha da Santa Cruz e 12 na
+          Rinha dos MCs.
+
+          Origem do nome: junção de “MC” com “homicida”, apelido dado pelos amigos por “matar os adversários” nas
+          batalhas de rima.
+
+          Início da carreira: começou em 2005 nas batalhas de freestyle. Em 2008 lançou o single “Triunfo”, que vendeu
+          700 cópias em um mês.
+          <br>
+
+          Primeiros trabalhos:
+          <br>
+          2009 – lançou sua primeira mixtape com 25 faixas: “Pra quem já mordeu um cachorro por comida até que cheguei
+          logo”, e foi indicado ao VMB em três categorias.
+          <br>
+          2010 – lançou o single “Avua Besouro”, o EP “Sua Mina Ouve Meu Rap Também” e a mixtape “Emicídio”.
+          <br>
+          Reconhecimento e prêmios:
+          <br>
+          Venceu prêmios no Vídeo Music Brasil com “Então Toma” (Clipe do Ano) e também como Artista do Ano.
+          <br>
+          Internacional: em 2011 se apresentou no Festival de Coachella (EUA) e duas vezes no Rock in Rio.
+          <br>
+          Outros trabalhos: atuou como repórter no programa Manos e Minas (TV Cultura) e no Sangue B (MTV).”
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalCriolo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Criolo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          “Kleber Cavalcante Gomes, conhecido artisticamente como Criolo (anteriormente Criolo Doido), é um cantor,
+          rapper, compositor e ator brasileiro, indicado ao Grammy Latino em 2019.
+          <br>Filho de um metalúrgico e de uma professora que migraram do Ceará para São Paulo, Criolo cresceu na Zona
+          Sul da cidade.
+          <br>
+          Ele iniciou sua trajetória artística ainda na infância, escrevendo rap aos 11 anos e participando de batalhas
+          de rap a partir de 1989, consolidando sua presença no movimento hip hop. Em 2006, lançou seu primeiro álbum de
+          estúdio, Ainda Há Tempo, e fundou a Rinha dos MC’s, espaço dedicado a batalhas de freestyle, apresentações
+          musicais, exposições de grafite e fotografia, que se mantém ativo até hoje.
+          <br>
+          Em 2017, Criolo lançou seu primeiro álbum voltado ao samba, acompanhado da Revista Criolo, distribuída como
+          encarte do disco. Este projeto rendeu-lhe o prêmio de Melhor Cantor de Samba no Prêmio da Música Brasileira em
+          2018, consolidando sua importância na música nacional.
+          <br>
+          Além disso, Criolo trabalhou como professor de artes por 12 anos, e em 2004 começou a divulgar suas gravações
+          caseiras no Myspace, iniciando sua presença digital antes do reconhecimento nacional.”
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalSabotage" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Sabotage</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          “Mauro Mateus dos Santos, mais conhecido como Sabotage, foi um dos maiores rappers brasileiros, reconhecido
+          por seu penteado característico e letras que abordavam críticas sociais e experiências pessoais. Nascido em 3
+          de abril de 1973, em São Paulo, foi criado na Favela do Canão, na zona sul da cidade, e enfrentou uma infância
+          marcada pela pobreza e pelo envolvimento precoce com o tráfico, a fim de ajudar a família.
+          <br>
+          Durante a adolescência, Mauro esteve na Febem, ganhando o apelido de Sabotage, dado por seu irmão Deda.
+          <br> Apesar das dificuldades e da violência vivida desde cedo, incluindo a morte de seu irmão, ele abandonou o
+          crime para se dedicar à música. Admirador de artistas como Noel Rosa, Pixinguinha e Chico Buarque, Sabotage
+          destacou-se por suas composições que tratavam de desigualdade social, fome, pobreza, amor e respeito.
+          <br>
+          No início dos anos 2000, tornou-se amigo de Rappin’ Hood e apresentou diversos nomes do rap paulista. Em 2000,
+          lançou seu único álbum em vida, Rap é Compromisso!, que vendeu mais de 1,7 milhão de cópias e é considerado um
+          marco do rap nacional.
+          <br>
+          Além da música, Sabotage atuou em filmes como O Invasor (2001) e Carandiru: O Filme (2003), sendo também
+          consultor técnico para retratar a realidade das favelas.
+          <br>
+          No auge da carreira, foi assassinado em 24 de janeiro de 2003, aos 29 anos, deixando dois filhos, Wanderson e
+          Tamires, esta última também cantora de rap e engajada em projetos sociais. Após sua morte, seu legado
+          artístico foi mantido por regravações de suas músicas, documentários e homenagens, sendo até hoje referência
+          no rap brasileiro, com milhões de ouvintes nas plataformas digitais.”
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Seção fUNK -->
+  <div class="quebratexto">
+    <h2>Funk</h2>
+  </div>
+
+  <div class="cards-container">
+    <!-- Card 1 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalAnitta">
+      <img src="img/anitta.png" alt="Anitta" class="card-img">
+      <div class="card-texto">
+        <h2>Anitta</h2>
+        <p>Funk / Pop brasileiro</p>
+      </div>
+
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalMarcinho">
+      <img src="img/marcinho.png" alt="MC Marcinho" class="card-img">
+      <div class="card-texto">
+        <h2>MC Marcinho</h2>
+        <p>Funk Melody</p>
+      </div>
+
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalCarol">
+      <img src="img/carol.png" alt="MC Carol" class="card-img">
+      <div class="card-texto">
+        <h2>MC Carol</h2>
+        <p>Funk carioca</p>
+      </div>
+
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalCatra">
+      <img src="img/catra.png" alt="MC Catra" class="card-img">
+      <div class="card-texto">
+        <h2>MC Catra</h2>
+        <p>Funk carioca</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modais -->
+  <div class="modal fade" id="modalAnitta" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Anitta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <b>Larissa de Macedo Machado</b>, conhecida mundialmente como <b>Anitta</b>, nasceu em 30 de março de 1993, em
+          Honório Gurgel, Zona Norte do Rio de Janeiro.
+          Filha de uma artesã e de um vendedor, começou a cantar no coral da igreja aos 8 anos. Inspirou-se na
+          minissérie <i>Presença de Anita</i> para criar seu nome artístico e, em 2010, iniciou sua carreira no funk
+          pela Furacão 2000, lançando músicas como <i>Eu Vou Ficar</i>.
+          Em 2013, ganhou projeção nacional com <i>Show das Poderosas</i>, que se tornou um dos maiores sucessos do
+          funk-pop.
+          Desde então, consolidou-se como artista internacional, colaborando com nomes como Madonna, J Balvin, Maluma e
+          Cardi B.
+          Anitta é reconhecida não apenas pela música, mas também por sua habilidade em gerenciar a própria carreira,
+          tornando-se símbolo de empoderamento feminino e representatividade brasileira no cenário mundial.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalMarcinho" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">MC Marcinho</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <b>MC Marcinho</b> (1977–2023), nascido em Duque de Caxias (RJ), foi um dos maiores nomes do funk melody,
+          conhecido como o "Príncipe do Funk".
+          Iniciou sua carreira nos anos 1990 e ficou famoso por músicas românticas e contagiantes, como
+          <i>Glamurosa</i>, <i>Rap do Solitário</i>, <i>Princesa</i> e <i>Garota Nota 100</i>.
+          Seu estilo diferenciava-se pelo tom melódico e pelas letras que falavam de amor e cotidiano, ajudando a
+          expandir o alcance do funk para além das comunidades.
+          Com carisma e talento, construiu uma carreira sólida e inspirou novas gerações de funkeiros.
+          Mesmo enfrentando problemas de saúde nos últimos anos, manteve-se como referência cultural e afetiva para
+          milhões de fãs.
+          Seu legado permanece vivo como um dos grandes representantes do funk brasileiro.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalCarol" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">MC Carol</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <b>MC Carol</b>, nascida em 1993 em Niterói (RJ), é uma das artistas mais autênticas do funk carioca.
+          Sua carreira começou em bailes e rapidamente ganhou projeção pela força de suas letras, que misturam
+          irreverência, crítica social e empoderamento feminino.
+          Ficou conhecida por músicas como <i>Minha Vó Tá Maluca</i>, <i>Não Foi Cabral</i> e <i>100% Feminista</i>,
+          parceria com Karol Conká.
+          Além da música, MC Carol é reconhecida por sua postura firme em debates sobre racismo, machismo e
+          desigualdade, tornando-se também uma importante voz política e social no Brasil.
+          Sua presença é marcante não só nos palcos, mas também na luta por maior representatividade das mulheres e da
+          periferia.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalCatra" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">MC Catra</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <b>Wagner Domingues Costa</b>, conhecido como <b>MC Catra</b> (1968–2018), foi um dos maiores ícones do funk
+          carioca.
+          Antes da fama, estudou em colégio de elite e chegou a trabalhar com tecnologia, mas encontrou no funk sua
+          verdadeira vocação.
+          Ganhou notoriedade no início dos anos 2000 com músicas como <i>Adultério</i>, <i>Uh Papai Chegou</i> e <i>Toma
+            Toma</i>, tornando-se símbolo da irreverência e da energia do gênero.
+          Conhecido também por sua vida pessoal polêmica, com dezenas de filhos, Catra era visto como uma figura
+          carismática, divertida e muito respeitada dentro das comunidades.
+          Além do funk, flertou com outros gêneros musicais, mostrando sua versatilidade.
+          Sua influência ultrapassou gerações, consolidando-o como um dos grandes nomes da história do funk brasileiro.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seção Samba e pagoda -->
+  <div class="quebratexto">
+    <h2>Samba e pagode</h2>
+  </div>
+
+  <div class="cards-container">
+    <!-- Card 1 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalZeca">
+      <img src="img/zeca.png" alt="Zeca Pagodinho" class="card-img">
+      <div class="card-texto">
+        <h2>Zeca Pagodinho</h2>
+        <p>Samba e Pagode</p>
+      </div>
+
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalArlindo">
+      <img src="img/arlindo.png" alt="Arlindo Cruz" class="card-img">
+      <div class="card-texto">
+        <h2>Arlindo Cruz</h2>
+        <p>Samba e Pagode</p>
+      </div>
+
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalClara">
+      <img src="img/clara.png" alt="Clara Nunes" class="card-img">
+      <div class="card-texto">
+        <h2>Clara Nunes</h2>
+        <p>Samba</p>
+      </div>
+
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalFundo">
+      <img src="img/fd.png" alt="Fundo de Quintal" class="card-img">
+      <div class="card-texto">
+        <h2>Fundo de Quintal</h2>
+        <p>Pagode</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modais -->
+  <div class="modal fade" id="modalZeca" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Zeca Pagodinho</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <b>Zeca Pagodinho</b> (nascido em 1959, no Rio de Janeiro) é um dos maiores nomes do samba e do pagode no
+          Brasil.
+          Cresceu em Xerém, onde começou a frequentar rodas de samba e se destacar pelo talento.
+          Ficou famoso a partir dos anos 1980, quando lançou sucessos como <i>Camarão que Dorme a Onda Leva</i>,
+          <i>Deixa a Vida Me Levar</i> e <i>Verdade</i>.
+          Carismático e popular, representa a essência do samba carioca, com músicas que falam do cotidiano, da alegria
+          e da malandragem.
+          É reconhecido como um dos grandes ícones da música popular brasileira.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalArlindo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Arlindo Cruz</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <b>Arlindo Cruz</b> (nascido em 1958, no Rio de Janeiro) é cantor, compositor e instrumentista, considerado um
+          dos maiores sambistas brasileiros.
+          Iniciou sua carreira no final dos anos 1970 e ganhou destaque como integrante do grupo <i>Fundo de
+            Quintal</i>.
+          Como compositor, escreveu clássicos como <i>Bagaço da Laranja</i>, <i>Além da Razão</i> e <i>O Show Tem Que
+            Continuar</i>.
+          Arlindo ajudou a renovar o samba e o pagode, sendo referência pela sensibilidade nas letras e pela habilidade
+          no cavaquinho.
+          Sua obra permanece como um marco da cultura popular brasileira.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalClara" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Clara Nunes</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <b>Clara Nunes</b> (1942–1983) foi uma das maiores cantoras do samba e da música popular brasileira.
+          Nascida em Minas Gerais, começou cantando em programas de rádio e rapidamente conquistou o público com sua voz
+          marcante.
+          Tornou-se a primeira cantora brasileira a vender mais de 100 mil cópias de um disco.
+          Suas canções, como <i>O Mar Serenou</i>, <i>Conto de Areia</i> e <i>Canto das Três Raças</i>, celebram a
+          cultura afro-brasileira e as tradições populares.
+          Clara Nunes é lembrada como um símbolo de força, devoção religiosa e amor pelo samba.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalFundo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Fundo de Quintal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          O <b>Fundo de Quintal</b>, criado no final dos anos 1970 no Rio de Janeiro, é um dos grupos mais importantes
+          da história do samba e do pagode.
+          Formado por músicos como Jorge Aragão, Almir Guineto, Bira Presidente e outros grandes nomes, o grupo ficou
+          conhecido por inovar no ritmo, incorporando instrumentos como o tantan, o repique de mão e o banjo.
+          Sucessos como <i>A Amizade</i>, <i>O Show Tem Que Continuar</i> e <i>Do Fundo do Nosso Quintal</i> marcaram
+          gerações.
+          Até hoje, o Fundo de Quintal é referência de tradição e inovação, sendo considerado o berço do pagode moderno.
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <!--=================-->
+  <!--BATALHA DE RIMA-->
+  <div class="quebratexto">
+    <h2>BATALHA DE RIMA</h2>
+  </div>
+  <div class="cards-container">
+    <!-- Card 1 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalAldeia">
+      <img src="img/aldeia.png" alt="Batalha da Aldeia" class="card-img">
+      <div class="card-texto">
+        <h2>Batalha da Aldeia</h2>
+        <p>Batalha de Rimas</p>
+      </div>
+
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalB16">
+      <img src="img/b16.png" alt="Batalha da 16" class="card-img">
+      <div class="card-texto">
+        <h2>Batalha da 16</h2>
+        <p>Batalha de Rimas</p>
+      </div>
+
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalBZL">
+      <img src="img/norte.png" alt="Batalha da Norte" class="card-img">
+      <div class="card-texto">
+        <h2>Batalha da Norte</h2>
+        <p>Batalha de Rimas</p>
+      </div>
+
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card" data-bs-toggle="modal" data-bs-target="#modalLeste">
+      <img src="img/ze.png" alt="Batalha da Leste" class="card-img">
+      <div class="card-texto">
+        <h2>Batalha da Leste</h2>
+        <p>Batalha de Rimas</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modais atualizados com biografias das batalhas de rima -->
+  <div class="modal fade" id="modalAldeia" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Batalha da Aldeia</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <b>Batalha da Aldeia</b> — Criada em 2016, em Barueri (SP), tornou-se a referência nacional do freestyle.
+          Famosa por grandes plateias e vídeos virais no YouTube, revelou nomes como Kant, Krawk, Leozin e César MC. A
+          Aldeia ajudou a profissionalizar as batalhas, ampliando alcance e visibilidade do movimento em todo o Brasil.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalB16" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Batalha da 16</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <b>Batalha da 16</b> — Surgiu em 2019 como uma intervenção cultural no bairro Morro Doce, zona noroeste de São
+          Paulo, em frente à Favela da 16. Acontece toda primeira sexta do mês, às 19h.
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalBZL" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Batalha da Norte</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <b>Batalha da Norte (Zona Norte)</b> —A "Batalha da Norte" é uma batalha de rimas que surgiu em Santana, São
+          Paulo, a partir da iniciativa de dois amigos que queriam criar um evento de freestyle mais justo para os MCs
+          da Aldeia.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalLeste" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content conteudo">
+        <div class="modal-header">
+          <h5 class="modal-title">Batalha da Leste</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <b>Batalha da Leste</b> — Distinta da Batalha da ZL por sua identidade própria dentro da região leste, a
+          Batalha da Leste fomentou microcenas locais e abriu espaço para MCs emergentes. Conhecida por valorizar
+          criatividade e diversidade de estilos dentro do freestyle.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+
+ <footer>
+    <p>As alecrim dourados e o pé de xu © 2025</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

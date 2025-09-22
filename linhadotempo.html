@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linha do Tempo - Arte Periférica</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+
+    }
+
+    @font-face {
+      font-family: futura-display;
+      src: url(Fontes/futura-display-cufonfonts/Futura\ Display.ttf);
+    }
+
+    @font-face {
+      font-family: geometrica-sans;
+      src: url(Fontes/Boris-Garic_Geometrica-sans-free-demo_070417/GeometricaSans-Regular.ttf);
+    }
+
+    @font-face {
+      font-family: graffiti;
+      src: url(Fontes/sprite-graffiti/Sprite\ Graffiti.otf);
+    }
+    
+        @font-face {
+            font-family: BebasNeue;
+            src: url(Fontes/Bebas_Neue/BebasNeue-Regular.ttf);
+        }
+
+    body {
+      color: #fff;
+      line-height: 1.6;
+      font-family: geometrica-sans;
+    }
+
+    /* Parallax base */
+
+    .parallax {
+      height: 100vh;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .titulo_nav{
+            font-family: BebasNeue;
+        }
+        .arte_nav{
+            font-family: graffiti;
+            color: #fe731d;
+        }
+
+    /* Sobreposição escura para legibilidade */
+    .overlay {
+      background: rgba(0, 0, 0, 0.75);
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 900px;
+    }
+
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.5);
+      /* semi-transparente */
+      font-family: futura-display;
+    }
+
+    .navbar a {
+      color: white !important;
+      font-weight: 500;
+    }
+
+    h1,
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #ffd700;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #ffcc00;
+    }
+
+    p {
+      font-size: 1.1rem;
+    }
+
+    /* Imagens diferentes para cada década */
+    
+    .inicio h1 {
+      font-family: graffiti;
+      font-size: 600%;
+      padding: 0rem;
+      line-height: 1.1;
+    }
+
+    .inicio h2 {
+      font-family: futura-display;
+      font-size: 450%;
+      padding: 0rem;
+      line-height: 1.1;
+    }
+
+    .inicio p {
+      font-size: 150%;
+    }
+
+    .inicio {
+      background-image: url(img/favelas.png);
+      /* troque os links */
+    }
+
+    .anos60 {
+      background-image: url(img/Anos60.png);
+    }
+
+    .anos70 {
+      background-image: url(img/anos70.png);
+    }
+
+    .anos80 {
+      background-image: url(img/anos80.png);
+    }
+
+    .anos90 {
+      background-image: url(img/anos\ 90.png);
+    }
+
+    .anos2000 {
+      background-image: url(img/anos2000.png);
+    }
+
+    .anos2010 {
+      background-image: url(img/2010.png);
+    }
+
+    .anos2020 {
+      background-image: url(img/anos2020.png);
+    }
+
+    .quebratexto {
+      background-color: black;
+      color: #ffcc00;
+      line-height: 1.3em;
+      text-align: center;
+      font-family: graffiti;
+      padding: 2rem 1rem;
+    }
+
+    .quebratexto h2 {
+      font-size: 5rem;
+    }
+
+    footer {
+      color: #fff;
+      background: #111;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+       <a class="navbar-brand" href="Index.html">
+                <h5 class="titulo_nav">Quebr<span class="arte_nav">Arte</span></h5>
+            </a>
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link active" href="Index.html">Home</a>
+          <a class="nav-link" href="linhadotempo.html">Linha do Tempo</a>
+          <a class="nav-link" href="musica.html">Músicas</a>
+          <a class="nav-link" href="livros.html">Livros</a>
+          <a class="nav-link" href="Pintura.html">Pintura</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- Início -->
+  <section class="parallax inicio">
+    <div>
+      <h1>Linha do Tempo</h1>
+      <h2>Arte e Artistas Periféricos</h2>
+      <p>Uma jornada pela cultura das quebradas brasileiras, da ditadura até a atualidade.</p>
+    </div>
+  </section>
+  <div class="quebratexto">
+    <h2>Anos 60-70</h2>
+  </div>
+
+  <!-- 1960-1970 -->
+  <section class="parallax anos60">
+    <div class="overlay">
+      <h2>Samba e resistência cultural</h2>
+      <p>Durante a ditadura militar, as escolas de samba atuaram como espaços de resistência cultural. Apesar da censura
+        a enredos, da repressão policial em ensaios e da vigilância constante, usaram criatividade para driblar a
+        repressão e manter vivas as tradições do samba. Enredos como Heróis da Liberdade (Império Serrano, 1969) e Os
+        Sertões (Em Cima da Hora, 1976) simbolizam essa resistência, mostrando que o carnaval foi também uma forma de
+        luta e afirmação das comunidades periféricas.</p>
+    </div>
+  </section>
+  <!-- final 70 -->
+  <div class="quebratexto">
+    <h2>Final de 70</h2>
+  </div>
+  <section class="parallax anos70">
+    <div class="overlay">
+      <h2>Chegada do hip hop e breakdance</h2>
+      <p>O movimento hip hop começa a chegar ao Brasil, especialmente em São Paulo, trazendo o breakdance, o rap e o
+        grafite como novas formas de expressão da juventude periférica. Essas linguagens se tornam meios de denúncia
+        contra o racismo e a desigualdade, além de espaços de identidade e resistência cultural.</p>
+    </div>
+  </section>
+  <!-- 1980 -->
+  <div class="quebratexto">
+    <h2>Anos 80</h2>
+  </div>
+  <section class="parallax anos80">
+    <div class="overlay">
+      <h2>RAP Nacional</h2>
+      <p>Nos anos 1980, o rap nacional começou a se consolidar como a principal voz das periferias, transformando
+        vivências de desigualdade, racismo e violência em letras diretas e de denúncia social. Foi nesse contexto que
+        surgiu, em 1988, o grupo Racionais MC’s, que se tornaria o maior representante do rap brasileiro e um marco da
+        resistência cultural. O movimento hip hop cresceu e passou a reunir música, dança e grafite, fortalecendo a
+        identidade das comunidades periféricas.</p>
+    </div>
+  </section>
+
+  <!-- 1990 -->
+  <div class="quebratexto">
+    <h2>Anos 90</h2>
+  </div>
+  <section class="parallax anos90">
+    <div class="overlay">
+      <h2>Grafite e Arte Urbana</h2>
+      <p>Nos anos 1990, o grafite ganhou destaque como arte urbana das periferias, transformando muros em espaços de
+        crítica social e identidade. Ao mesmo tempo, os saraus literários se consolidaram, reunindo poesia, música e
+        ativismo, como o Sarau da Cooperifa, que se tornou referência. A literatura marginal ganhou força, dando voz a
+        escritores e poetas das comunidades, reafirmando a periferia como espaço de criação e resistência cultural.</p>
+    </div>
+  </section>
+
+  <!-- 2000 -->
+  <div class="quebratexto">
+    <h2>Anos 2000</h2>
+  </div>
+  <section class="parallax anos2000">
+    <div class="overlay">
+      <h2>Funk Carioca e Funk Ostentação</h2>
+      <p>Nos anos 2000, o funk carioca se consolidou como uma das principais expressões musicais das favelas, retratando
+        a realidade e a vivência da juventude periférica. Em São Paulo, surgiu o funk ostentação, marcado pelo desejo de
+        ascensão social e pelo consumo como símbolo de conquista. Ao lado da música, coletivos culturais fortaleceram o
+        hip hop, o rap e o grafite, ampliando a visibilidade das vozes periféricas em todo o país.</p>
+    </div>
+  </section>
+
+  <!-- 2010 -->
+  <div class="quebratexto">
+    <h2>Anos 2010</h2>
+  </div>
+  <section class="parallax anos2010">
+    <div class="overlay">
+      <h2>Slam e Poesia Falada</h2>
+      <p>Nos anos 2010, os slams de poesia ganharam força nas periferias, transformando a palavra falada em instrumento
+        de arte e militância. A literatura marginal se expandiu com autores como Ferréz, Sérgio Vaz e Conceição
+        Evaristo, que ampliaram o alcance da escrita periférica. Nesse período, o rap e o funk conquistaram ainda mais
+        espaço nas mídias digitais, projetando artistas das comunidades para cenários nacionais e internacionais.</p>
+    </div>
+  </section>
+
+  <!-- 2020 até hoje -->
+  <div class="quebratexto">
+    <h2>2020 - hoje</h2>
+  </div>
+  <section class="parallax anos2020">
+    <div class="overlay">
+      <h2>Produções Multimídia e Periferia Digital</h2>
+      <p>Nos anos 2020, as expressões periféricas se expandiram para o universo digital, com rap, funk e slams
+        alcançando milhões de pessoas por meio de plataformas de streaming e redes sociais. O cinema independente,
+        podcasts e produções audiovisuais ampliaram as narrativas das comunidades. Movimentos como o afrofuturismo e
+        coletivos artísticos digitais reforçaram a criatividade periférica, unindo tradição e inovação tecnológica na
+        luta por visibilidade e reconhecimento.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>As alecrim dourados e o pé de xu © 2025</p>
+  </footer>
+
+</body>
+
+</html>
