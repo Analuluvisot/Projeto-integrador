@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Linha do Tempo - Arte Periférica</title>
+  <title>QuebrARTE Linha do Tempo</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     /* Reset básico */
@@ -29,11 +29,11 @@
       font-family: graffiti;
       src: url(Fontes/sprite-graffiti/Sprite\ Graffiti.otf);
     }
-    
-        @font-face {
-            font-family: BebasNeue;
-            src: url(Fontes/Bebas_Neue/BebasNeue-Regular.ttf);
-        }
+
+    @font-face {
+      font-family: BebasNeue;
+      src: url(Fontes/Bebas_Neue/BebasNeue-Regular.ttf);
+    }
 
     body {
       color: #fff;
@@ -55,13 +55,15 @@
       text-align: center;
       padding: 2rem;
     }
-    .titulo_nav{
-            font-family: BebasNeue;
-        }
-        .arte_nav{
-            font-family: graffiti;
-            color: #fe731d;
-        }
+
+    .titulo_nav {
+      font-family: BebasNeue;
+    }
+
+    .arte_nav {
+      font-family: graffiti;
+      color: #fe731d;
+    }
 
     /* Sobreposição escura para legibilidade */
     .overlay {
@@ -80,6 +82,15 @@
     .navbar a {
       color: white !important;
       font-weight: 500;
+    }
+
+    .titulo_nav {
+      font-family: BebasNeue;
+    }
+
+    .arte_nav {
+      font-family: graffiti;
+      color: #fe731d;
     }
 
     h1,
@@ -102,7 +113,7 @@
     }
 
     /* Imagens diferentes para cada década */
-    
+
     .inicio h1 {
       font-family: graffiti;
       font-size: 600%;
@@ -181,9 +192,10 @@
 <body>
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid">
-       <a class="navbar-brand" href="index.html">
-                <h5 class="titulo_nav">Quebr<span class="arte_nav">Arte</span></h5>
-            </a>
+      <a class="navbar-brand" href="index.html">
+        <h5 class="titulo_nav">Quebr<span class="arte_nav">Arte</span></h5>
+      </a>
+
       <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
         aria-label="Toggle navigation">
