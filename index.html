@@ -6,38 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>QuebrARTE</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
     <style>
-        @font-face {
-            font-family: futura-display;
-            src: url(Fontes/futura-display-cufonfonts/Futura\ Display.ttf);
-        }
 
-        @font-face {
-            font-family: geometrica-sans;
-            src: url(Fontes/Boris-Garic_Geometrica-sans-free-demo_070417/GeometricaSans-Regular.ttf);
-        }
-
-        @font-face {
-            font-family: graffiti;
-            src: url(Fontes/sprite-graffiti/Sprite\ Graffiti.otf);
-        }
-
-        @font-face {
-            font-family: BebasNeue;
-            src: url(Fontes/Bebas_Neue/BebasNeue-Regular.ttf);
-        }
-
-        body {
-            font-family: geometrica-sans;
-            background-color: #333333;
-        }
-
-        /* Carrossel ocupa 100% da tela */
-        #carouselExampleCaptions {
-            width: 100%;
-            height: 100vh;
-        }
 
         .titulo {
             font-size: clamp(6rem, 12vw, 8rem) !important;
@@ -73,27 +45,6 @@
             /* evita que grude nas bordas em telas pequenas */
         }
 
-        /* Navbar sempre visível */
-        .navbar {
-            background-color: rgba(0, 0, 0, 0.5);
-            /* semi-transparente */
-            font-family: futura-display;
-        }
-
-        .navbar a {
-            color: white !important;
-            font-weight: 500;
-        }
-
-        .titulo_nav {
-            font-family: BebasNeue;
-        }
-
-        .arte_nav {
-            font-family: graffiti;
-            color: #fe731d;
-        }
-
         .quebra-texto {
             width: 100%;
         }
@@ -121,18 +72,18 @@
             /* centraliza verticalmente */
             justify-content: center;
             /* centraliza horizontalmente */
-       
             box-sizing: border-box;
             /* garante que o padding não aumente a largura */
+            
         }
 
         .banner img {
-            max-width: 100%;
-            /* evita que a imagem ultrapasse a div */
+            width: 100%;
             height: auto;
-            /* mantém proporção */
             display: block;
+            /* já remove espaço embaixo da img */
         }
+
 
 
         .texto {
@@ -185,23 +136,12 @@
         }
 
         /* Efeito hover */
-        .botoes img:hover {
-            transform: scale(1.2);
+        .botoes:hover {
+            border-radius: 8px;
+            transform: scale(1.1);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .guia {
-            background-color: #f9ec3a;
-        }
-
-        
-    footer {
-      color: #fff;
-      background: #111;
-      padding: 1rem;
-      text-align: center;
-      font-size: 0.9rem;
-    }
 
         .quebra-texto img,
         .objetivo img {
@@ -233,6 +173,15 @@
                 flex: 1 1 100%;
                 /* cada um ocupa 100% */
             }
+
+            .botoes-container {
+                margin-top: 30px;
+            }
+
+            .guia {
+                min-height: 50px;
+            }
+
         }
     </style>
 </head>
@@ -262,7 +211,7 @@
     </nav>
 
 
-    <div id="carouselExampleCaptions" class="carousel slide">
+    <div id="inicial" class="carousel slide">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="img/favelas.png" class="d-block w-100" alt="Imagem da favela">
@@ -288,7 +237,6 @@
         </div>
     </div>
     <div class="guia">
-        
         <div class="menu text-center">
             <div class="botoes-container d-flex justify-content-center flex-wrap gap-3">
                 <a class="botoes" href="livros.html">
@@ -309,8 +257,8 @@
     </div>
 
     <footer>
-    <p>As alecrim dourados e o pé de xu © 2025</p>
-  </footer>
+        <p>As alecrim dourados e o pé de xu © 2025</p>
+    </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>

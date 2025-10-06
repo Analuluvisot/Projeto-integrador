@@ -6,37 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>QuebrARTE - Pinturas</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
 
   <style>
     /* Carrossel ocupa 100% da tela */
-    @font-face {
-      font-family: futura-display;
-      src: url(Fontes/futura-display-cufonfonts/Futura\ Display.ttf);
-    }
 
-    @font-face {
-      font-family: geometrica-sans;
-      src: url(Fontes/Boris-Garic_Geometrica-sans-free-demo_070417/GeometricaSans-Regular.ttf);
-    }
-
-    @font-face {
-      font-family: graffiti;
-      src: url(Fontes/sprite-graffiti/Sprite\ Graffiti.otf);
-    }
-
-    @font-face {
-      font-family: BebasNeue;
-      src: url(Fontes/Bebas_Neue/BebasNeue-Regular.ttf);
-    }
-
-    #carouselExampleCaptions {
-      width: 100%;
-      height: 100vh;
-    }
-
-    body {
-      background-color: #333;
-    }
 
     .navbar {
       background-color: rgba(0, 0, 0, 0.5);
@@ -77,15 +51,6 @@
       padding: 0 5%;
     }
 
-    /* Navbar sempre visível */
-    .navbar {
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    .navbar a {
-      color: white !important;
-      font-weight: 500;
-    }
     .quebratexto {
       background-image: url(img/fundo\ musica.png);
       background-color: black;
@@ -102,14 +67,8 @@
       /* ajuste o valor conforme desejar */
     }
 
+
     
-    footer {
-      color: #fff;
-      background: #111;
-      padding: 1rem;
-      text-align: center;
-      font-size: 0.9rem;
-    }
 
     /* Estilo dos cards */
     .cards-container {
@@ -187,15 +146,6 @@
       padding: 2rem 1rem;
     }
 
-    .titulo_nav {
-      font-family: BebasNeue;
-    }
-
-    .arte_nav {
-      font-family: graffiti;
-      color: #fe731d;
-    }
-
     .quebratexto h2 {
       font-size: 5rem;
       text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
@@ -256,7 +206,7 @@
   </nav>
 
   <!-- Carrossel -->
-  <div id="carouselExampleCaptions" class="carousel slide">
+  <div id="inicial" class="carousel slide">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="img/favelas.png" class="d-block w-100" alt="Imagem da favela">
