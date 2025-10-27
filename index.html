@@ -9,20 +9,6 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <style>
-
-
-        .titulo {
-            font-size: clamp(6rem, 12vw, 8rem) !important;
-            font-family: BebasNeue;
-            /*colocar font family-->*/
-        }
-
-        .arte {
-            font-size: clamp(6rem, 20vw, 12rem) !important;
-            font-family: graffiti;
-            color: #fe731d;
-        }
-
         .carousel-item img {
             width: 100%;
             height: 100vh;
@@ -37,12 +23,22 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: white;
-            font-size: clamp(3rem, 10vw, 6rem) !important;
             font-weight: bold;
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
             text-align: center;
             padding: 0 5%;
+           
             /* evita que grude nas bordas em telas pequenas */
+        }
+        .titulo{
+             font-family: BebasNeue;
+            font-size: clamp(4rem, 14vw, 8rem) !important;
+            line-height: 0.8;
+        }
+        .arte{
+            font-size: clamp(4.5rem, 16vw, 9rem) !important;
+            font-family: graffiti;
+            color: #fe731d;
         }
 
         .quebra-texto {
@@ -74,7 +70,7 @@
             /* centraliza horizontalmente */
             box-sizing: border-box;
             /* garante que o padding não aumente a largura */
-            
+
         }
 
         .banner img {
@@ -205,29 +201,44 @@
                     <a class="nav-link" href="musica.html">Músicas</a>
                     <a class="nav-link" href="livros.html">Livros</a>
                     <a class="nav-link" href="Pintura.html">Pintura</a>
+                    <a class="nav-link" href="podcast.html">Podcasts</a>
                 </div>
             </div>
         </div>
     </nav>
 
 
-    <div id="inicial" class="carousel slide">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="img/favelas.png" class="d-block w-100" alt="Imagem da favela">
-                <div class="inicio">
-                    <h5 class="titulo">Quebr<span class="arte">Arte</span></h5>
-                </div>
-            </div>
-        </div>
+    <div id="carouselExampleRide" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="img/favelas.png" class="d-block w-100" alt="...">
+      <div class="inicio">
+        <h5 class="titulo">Quebr<span class="arte">Arte</span></h5>
+      </div>
     </div>
+    <div class="carousel-item">
+      <a href="podcast.html"><img src="img/banner-podcast (2).png" class="d-block w-100" alt="..."></a>
+    </div>
+    <div class="carousel-item">
+      <img src="img/banner-podcast.png" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
-    <div class="quebra-texto">
-        <img src="img/quebra texto.png" alt="">
-    </div>
-    <div class="objetivo">
-        <img src="img/sobre nós3.0.png">
-    </div>
+
+
+
+   <br><br><br>
+
     <div class="divido">
         <div class="banner">
             <img src="img/Oruam.png">
@@ -235,6 +246,9 @@
         <div class="banner">
             <img src="img/seligaai.png">
         </div>
+    </div>
+    <div class="objetivo">
+        <img src="img/LIVROS (1920 x 800 px).png">
     </div>
     <div class="guia">
         <div class="menu text-center">
@@ -250,6 +264,9 @@
                 </a>
                 <a class="botoes" href="linhadotempo.html">
                     <img src="img/linha_tempo.png" alt="Linha do Tempo">
+                </a>
+                <a class="botoes" href="podcast.html">
+                    <img src="img/Podcast.jpeg" alt="Linha do Tempo">
                 </a>
             </div>
 
